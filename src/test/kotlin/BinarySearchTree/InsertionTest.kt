@@ -6,6 +6,18 @@ class BinarySearchTreeInsertionTest {
     private val value = 100
     private val expectedTree = BinarySearchTree<Int, Int>()
     private val actualTree = BinarySearchTree<Int, Int>()
+    
+    private fun BinaryNode.addLeftSon(key: K, value: V) {
+        val newSon = BinaryNode(key, value)
+        this.left = newSon
+        newSon.parent = this
+    }
+
+    private fun BinaryNode.addRightSon(key: K, value: V) {
+        val newSon = BinaryNode(key, value)
+        this.right = newSon
+        newSon.parent = this
+    }
 
     @Test
     fun insertRootCase() {
@@ -23,9 +35,7 @@ class BinarySearchTreeInsertionTest {
         // Building expected structure of tree
         expectedTree.root = BinaryNode(0, value)
 
-        val leftNode = BinaryNode(-100, value)
-        leftNode.parent = expectedTree.root
-        expectedTree.root!!.left = leftNode
+        expectedTree.root!!.addLeftSon(-100, value)
 
         // Making tree using existing methods
         for (key in arrayOf(0, -100))
@@ -39,9 +49,7 @@ class BinarySearchTreeInsertionTest {
         // Building expected structure of tree
         expectedTree.root = BinaryNode(0, value)
 
-        val rightNode = BinaryNode(100, value)
-        rightNode.parent = expectedTree.root
-        expectedTree.root!!.right = rightNode
+        expectedTree.root!!.addRightSon(100, value)
 
         // Making tree using existing methods
         for (key in arrayOf(0, 100))
@@ -55,13 +63,9 @@ class BinarySearchTreeInsertionTest {
         // Building expected structure of tree
         expectedTree.root = BinaryNode(0, value)
 
-        val leftNode = BinaryNode(-100, value)
-        leftNode.parent = expectedTree.root
-        expectedTree.root!!.left = leftNode
+        expectedTree.root!!.addLeftSon(-100, value)
 
-        val nextLeftNode = BinaryNode(-200, value)
-        nextLeftNode.parent = expectedTree.root!!.left
-        expectedTree.root!!.left!!.left = nextLeftNode
+        expectedTree.root!!.left!!.addLeftSon(-200, value)
 
         // Making tree using existing methods
         for (key in arrayOf(0, -100, -200))
@@ -75,13 +79,9 @@ class BinarySearchTreeInsertionTest {
         // Building expected structure of tree
         expectedTree.root = BinaryNode(0, value)
 
-        val leftNode = BinaryNode(-100, value)
-        leftNode.parent = expectedTree.root
-        expectedTree.root!!.left = leftNode
+        expectedTree.root!!.addLeftSon(-100, value)
 
-        val nextRightNode = BinaryNode(-50, value)
-        nextRightNode.parent = expectedTree.root!!.left
-        expectedTree.root!!.left!!.right = nextRightNode
+        expectedTree.root!!.left!!.addRightSon(-50, value)
 
         // Making tree using existing methods
         for (key in arrayOf(0, -100, -50))
@@ -95,13 +95,9 @@ class BinarySearchTreeInsertionTest {
         // Building expected structure of tree
         expectedTree.root = BinaryNode(0, value)
 
-        val rightNode = BinaryNode(100, value)
-        rightNode.parent = expectedTree.root
-        expectedTree.root!!.right = rightNode
+        expectedTree.root!!.addRightSon(100, value)
 
-        val nextLeftNode = BinaryNode(50, value)
-        nextLeftNode.parent = expectedTree.root!!.right
-        expectedTree.root!!.right!!.left = nextLeftNode
+        expectedTree.root!!.right!!.addLeftSon(50, value)
 
         // Making tree using existing methods
         for (key in arrayOf(0, 100, 50))
@@ -115,13 +111,9 @@ class BinarySearchTreeInsertionTest {
         // Building expected structure of tree
         expectedTree.root = BinaryNode(0, value)
 
-        val rightNode = BinaryNode(100, value)
-        rightNode.parent = expectedTree.root
-        expectedTree.root!!.right = rightNode
+        expectedTree.root!!.addRightSon(100, value)
 
-        val nextRightNode = BinaryNode(200, value)
-        nextRightNode.parent = expectedTree.root!!.right
-        expectedTree.root!!.right!!.right = nextRightNode
+        expectedTree.root!!.right!!.addRightSon(200, value)
 
         // Making tree using existing methods
         for (key in arrayOf(0, 100, 200))
@@ -146,49 +138,27 @@ class BinarySearchTreeInsertionTest {
         // Building expected structure of tree
         expectedTree.root = BinaryNode(0, value)
 
-        val node2 = BinaryNode(-100, value)
-        node2.parent = expectedTree.root
-        expectedTree.root!!.left = node2
+        expectedTree.root!!.addLeftSon(-100, value)
 
-        val node3 = BinaryNode(100, value)
-        node3.parent = expectedTree.root
-        expectedTree.root!!.right = node3
+        expectedTree.root!!.addRightSon(100, value)
 
-        val node4 = BinaryNode(-200, value)
-        node4.parent = expectedTree.root!!.left
-        expectedTree.root!!.left!!.left = node4
+        expectedTree.root!!.left!!.addLeftSon(-200, value)
 
-        val node6 = BinaryNode(50, value)
-        node6.parent = expectedTree.root!!.right
-        expectedTree.root!!.right!!.left = node6
+        expectedTree.root!!.right!!.addLeftSon(50, value)
 
-        val node7 = BinaryNode(200, value)
-        node7.parent = expectedTree.root!!.right
-        expectedTree.root!!.right!!.right = node7
+        expectedTree.root!!.right!!.addRightSon(200, value)
 
-        val node9 = BinaryNode(-150, value)
-        node9.parent = expectedTree.root!!.left!!.left
-        expectedTree.root!!.left!!.left!!.right = node9
+        expectedTree.root!!.left!!.left!!.addRightSon(-150, value)
 
-        val node14 = BinaryNode(150, value)
-        node14.parent = expectedTree.root!!.right!!.right
-        expectedTree.root!!.right!!.right!!.left = node14
+        expectedTree.root!!.right!!.right!!.addLeftSon(150, value)
 
-        val node15 = BinaryNode(300, value)
-        node15.parent = expectedTree.root!!.right!!.right
-        expectedTree.root!!.right!!.right!!.right = node15
+        expectedTree.root!!.right!!.right!!.addRightSon(300, value)
 
-        val node28 = BinaryNode(125, value)
-        node28.parent = expectedTree.root!!.right!!.right!!.left
-        expectedTree.root!!.right!!.right!!.left!!.left = node28
-
+        expectedTree.root!!.right!!.right!!.left!!.addLeftSon(125, value)
 
         // Making tree using existing methods
-        // Trying to insert one key twice
-        for (key in arrayOf(0, 100, -100, 50, -200, 200, 150, 125, -150, 300)) {
+        for (key in arrayOf(0, 100, -100, 50, -200, 200, 150, 125, -150, 300))
             actualTree[key] = value
-            actualTree[key] = value
-        }
 
         assertEquals(expectedTree, actualTree)
     }
