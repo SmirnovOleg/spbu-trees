@@ -4,6 +4,8 @@ import org.junit.Before
 import org.junit.Test
 import java.util.Random
 
+const val SIZE = 10000
+
 class BinarySearchTreeSearchTest {
 
     private val expectedAnswers = mutableMapOf<Int, Int>()
@@ -12,7 +14,7 @@ class BinarySearchTreeSearchTest {
 
     @Before
     fun createTreeForSearching() {
-        while (expectedAnswers.size < 10000) {
+        while (expectedAnswers.size < SIZE) {
             val key = random.nextInt()
             val value = random.nextInt()
             expectedAnswers[key] = value
@@ -28,8 +30,8 @@ class BinarySearchTreeSearchTest {
 
     @Test
     fun searchForNonExistentKey() {
-        for (key in 1..20000) {
-            if ( ! (key in expectedAnswers.keys))
+        for (key in 1..(2 * SIZE)) {
+            if (key !in expectedAnswers.keys)
                 assertNull(actualTree[key])
         }
     }
@@ -37,8 +39,8 @@ class BinarySearchTreeSearchTest {
     @Test
     fun searchInEmptyTree() {
         val emptyTree = BinarySearchTree<Int, Int>()
-        for (key in 1..10000)
-            assertNull(actualTree[key])
+        for (key in 1..SIZE)
+            assertNull(emptyTree[key])
     }
 
 }

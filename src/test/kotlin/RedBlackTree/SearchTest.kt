@@ -12,7 +12,7 @@ class RedBlackTreeSearchTest {
 
     @Before
     fun createTreeForSearching() {
-        while (expectedAnswers.size < 10000) {
+        while (expectedAnswers.size < SIZE) {
             val key = random.nextInt()
             val value = random.nextInt()
             expectedAnswers[key] = value
@@ -28,7 +28,7 @@ class RedBlackTreeSearchTest {
 
     @Test
     fun searchForNonExistentKey() {
-        for (key in 1..20000) {
+        for (key in 1..(2 * SIZE)) {
             if ( ! (key in expectedAnswers.keys))
                 assertNull(actualTree[key])
         }
@@ -37,8 +37,8 @@ class RedBlackTreeSearchTest {
     @Test
     fun searchInEmptyTree() {
         val emptyTree = BinarySearchTree<Int, Int>()
-        for (key in 1..10000)
-            assertNull(actualTree[key])
+        for (key in 1..SIZE)
+            assertNull(emptyTree[key])
     }
 
 }

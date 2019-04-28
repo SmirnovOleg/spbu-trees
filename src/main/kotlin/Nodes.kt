@@ -10,10 +10,6 @@ abstract class Node<K: Comparable<K>, V, NodeType: Node<K, V, NodeType>>(var key
     val uncle: NodeType?
         get() = this.parent?.sibling
 
-    fun isLeaf(): Boolean {
-        return (this.left == null && this.right == null)
-    }
-
 }
 
 
@@ -30,24 +26,29 @@ class BinaryNode<K: Comparable<K>, V>(key: K, value: V) :
                 && key == other.key
                 && value == other.value)
     }
+
+    internal fun addLeftSon(key: K, value: V) {
+        val newSon = BinaryNode(key, value)
+        this.left = newSon
+        newSon.parent = this
+    }
+
+    internal fun addRightSon(key: K, value: V) {
+        val newSon = BinaryNode(key, value)
+        this.right = newSon
+        newSon.parent = this
+    }
 }
 
 
 
 
-class RedBlackNode<K: Comparable<K>, V>(key: K, value: V, var color: Char) :
+enum class Color {
+    Red, Black
+}
+
+class RedBlackNode<K: Comparable<K>, V>(key: K, value: V, var color: Color) :
         Node<K, V, RedBlackNode<K, V>>(key, value) {
-
-    // Using Strategy pattern
-    private val balancer = NodeBalancer<K, V, RedBlackNode<K, V>>()
-
-    fun leftRotate() {
-        balancer.leftRotate(this)
-    }
-
-    fun rightRotate() {
-        balancer.rightRotate(this)
-    }
 
     override fun equals(other: Any?): Boolean {
         return (other is RedBlackNode<*, *>
@@ -59,6 +60,29 @@ class RedBlackNode<K: Comparable<K>, V>(key: K, value: V, var color: Char) :
                 && value == other.value
                 && color == other.color)
     }
+
+    internal fun addLeftSon(key: K, value: V, color: Color) {
+        val newSon = RedBlackNode(key, value, color)
+        this.left = newSon
+        newSon.parent = this
+    }
+
+    internal fun addRightSon(key: K, value: V, color: Color) {
+        val newSon = RedBlackNode(key, value, color)
+        this.right = newSon
+        newSon.parent = this
+    }
+
+    // Using Strategy pattern
+    private val balancer = NodeBalancer<K, V, RedBlackNode<K, V>>()
+
+    internal fun leftRotate() {
+        balancer.leftRotate(this)
+    }
+
+    internal fun rightRotate() {
+        balancer.rightRotate(this)
+    }
 }
 
 
@@ -68,27 +92,22 @@ class AVLNode<K: Comparable<K>, V>(key: K, value: V) :
         Node<K, V, AVLNode<K, V>>(key, value) {
 
     var height: Int = 1
+        private set
         get() = kotlin.math.max((left?.height ?: 0), (right?.height ?: 0)) + 1
     var deltaHeight: Int = 0
+        private set
         get() = (left?.height ?: 0) - (right?.height ?: 0)
 
-    // Using Strategy pattern
-    private val balancer = NodeBalancer<K, V, AVLNode<K, V>>()
-
-    fun leftRotate() {
-        balancer.leftRotate(this)
+    internal fun addLeftSon(key: K, value: V) {
+        val newSon = AVLNode(key, value)
+        this.left = newSon
+        newSon.parent = this
     }
 
-    fun rightRotate() {
-        balancer.rightRotate(this)
-    }
-
-    fun bigLeftRotate() {
-        balancer.bigLeftRotate(this)
-    }
-
-    fun bigRightRotate() {
-        balancer.bigRightRotate(this)
+    internal fun addRightSon(key: K, value: V) {
+        val newSon = AVLNode(key, value)
+        this.right = newSon
+        newSon.parent = this
     }
 
     override fun equals(other: Any?): Boolean {
@@ -100,5 +119,24 @@ class AVLNode<K: Comparable<K>, V>(key: K, value: V) :
                 && key == other.key
                 && value == other.value
                 && height == other.height)
+    }
+
+    // Using Strategy pattern
+    private val balancer = NodeBalancer<K, V, AVLNode<K, V>>()
+
+    internal fun leftRotate() {
+        balancer.leftRotate(this)
+    }
+
+    internal fun rightRotate() {
+        balancer.rightRotate(this)
+    }
+
+    internal fun bigLeftRotate() {
+        balancer.bigLeftRotate(this)
+    }
+
+    internal fun bigRightRotate() {
+        balancer.bigRightRotate(this)
     }
 }

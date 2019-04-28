@@ -6,18 +6,6 @@ class RedBlackTreeInsertionTest {
     private val value = 100
     private val expectedTree = RedBlackTree<Int, Int>()
     private val actualTree = RedBlackTree<Int, Int>()
-    
-    private fun <K: Comparable<K>, V>RedBlackNode<K, V>.addLeftSon(key: K, value: V, color: Color) {
-        val newSon = RedBlackNode(key, value, color)
-        this.left = newSon
-        newSon.parent = this
-    }
-
-    private fun <K: Comparable<K>, V>RedBlackNode<K, V>.addRightSon(key: K, value: V, color: Color) {
-        val newSon = RedBlackNode(key, value, color)
-        this.right = newSon
-        newSon.parent = this
-    }
 
     @Test
     fun emptyTreeCase() {

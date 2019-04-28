@@ -6,18 +6,6 @@ class BinarySearchTreeInsertionTest {
     private val value = 100
     private val expectedTree = BinarySearchTree<Int, Int>()
     private val actualTree = BinarySearchTree<Int, Int>()
-    
-    private fun <K: Comparable<K>, V>BinaryNode<K, V>.addLeftSon(key: K, value: V) {
-        val newSon = BinaryNode(key, value)
-        this.left = newSon
-        newSon.parent = this
-    }
-
-    private fun <K: Comparable<K>, V>BinaryNode<K, V>.addRightSon(key: K, value: V) {
-        val newSon = BinaryNode(key, value)
-        this.right = newSon
-        newSon.parent = this
-    }
 
     @Test
     fun insertRootCase() {
