@@ -7,13 +7,13 @@ class BinarySearchTreeInsertionTest {
     private val expectedTree = BinarySearchTree<Int, Int>()
     private val actualTree = BinarySearchTree<Int, Int>()
     
-    private fun BinaryNode.addLeftSon(key: K, value: V) {
+    private fun <K: Comparable<K>, V>BinaryNode<K, V>.addLeftSon(key: K, value: V) {
         val newSon = BinaryNode(key, value)
         this.left = newSon
         newSon.parent = this
     }
 
-    private fun BinaryNode.addRightSon(key: K, value: V) {
+    private fun <K: Comparable<K>, V>BinaryNode<K, V>.addRightSon(key: K, value: V) {
         val newSon = BinaryNode(key, value)
         this.right = newSon
         newSon.parent = this
