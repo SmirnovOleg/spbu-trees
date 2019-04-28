@@ -190,25 +190,25 @@ class RedBlackTreeInsertionTest {
     @Test
     fun insertRedFatherBlackUncleCase() {
         // Building expected structure of tree
-        expectedTree.root = RedBlackNode(0, value, Color.Black)
+        expectedTree.root = RedBlackNode(-50, value, Color.Black)
 
-        expectedTree.root!!.addLeftSon(-75, value, Color.Red)
+        expectedTree.root!!.addLeftSon(-100, value, Color.Red)
 
-        expectedTree.root!!.addRightSon(100, value, Color.Black)
+        expectedTree.root!!.addRightSon(0, value, Color.Red)
 
-        expectedTree.root!!.left!!.addLeftSon(-100, value, Color.Black)
+        expectedTree.root!!.left!!.addLeftSon(-200, value, Color.Black)
 
-        expectedTree.root!!.left!!.addRightSon(-50, value, Color.Black)
+        expectedTree.root!!.left!!.addRightSon(-75, value, Color.Black)
 
-        expectedTree.root!!.right!!.addLeftSon(50, value, Color.Red)
+        expectedTree.root!!.right!!.addLeftSon(-25, value, Color.Black)
 
-        expectedTree.root!!.right!!.addRightSon(200, value, Color.Red)
+        expectedTree.root!!.right!!.addRightSon(100, value, Color.Black)
 
-        expectedTree.root!!.left!!.left!!.addLeftSon(-200, value, Color.Red)
+        expectedTree.root!!.left!!.right!!.addRightSon(-62, value, Color.Red)
 
-        expectedTree.root!!.left!!.right!!.addLeftSon(-62, value, Color.Red)
+        expectedTree.root!!.right!!.right!!.addLeftSon(50, value, Color.Red)
 
-        expectedTree.root!!.left!!.right!!.addRightSon(-25, value, Color.Red)
+        expectedTree.root!!.right!!.right!!.addRightSon(200, value, Color.Red)
 
         // Making tree using existing methods
         for (key in arrayOf(0, 100, -100, -50, 50, -25, -200, -75, -62, 200))
