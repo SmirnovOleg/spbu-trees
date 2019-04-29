@@ -36,7 +36,7 @@ class RedBlackTreeSearchTest {
 
     @Test
     fun searchInEmptyTree() {
-        val emptyTree = BinarySearchTree<Int, Int>()
+        val emptyTree = RedBlackTree<Int, Int>()
         for (key in 1..SIZE)
             assertNull(emptyTree[key])
     }
