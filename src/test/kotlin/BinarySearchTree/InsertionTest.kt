@@ -121,7 +121,6 @@ class BinarySearchTreeInsertionTest {
 
         // Node with number i has sons with numbers (2*i) and (2*i + 1)
         // Root has number 1
-        // Also method will insert the same keys one more time
 
         // Building expected structure of tree
         expectedTree.root = BinaryNode(0, value)
