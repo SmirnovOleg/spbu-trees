@@ -25,6 +25,8 @@ class AVLTreeInsertionTest {
 
         expectedTree.root!!.addLeftSon(-100, value)
 
+        expectedTree.root?.updateHeight()
+
         // Making tree using existing methods
         for (key in arrayOf(0, -100))
             actualTree[key] = value
@@ -38,6 +40,8 @@ class AVLTreeInsertionTest {
         expectedTree.root = AVLNode(0, value)
 
         expectedTree.root!!.addRightSon(100, value)
+
+        expectedTree.root?.updateHeight()
 
         // Making tree using existing methods
         for (key in arrayOf(0, 100))
@@ -55,6 +59,8 @@ class AVLTreeInsertionTest {
 
         expectedTree.root!!.addRightSon(0, value)
 
+        expectedTree.root?.updateHeight()
+
         // Making tree using existing methods
         for (key in arrayOf(0, -100, -200))
             actualTree[key] = value
@@ -70,6 +76,8 @@ class AVLTreeInsertionTest {
         expectedTree.root!!.addLeftSon(-100, value)
 
         expectedTree.root!!.addRightSon(0, value)
+
+        expectedTree.root?.updateHeight()
 
         // Making tree using existing methods
         for (key in arrayOf(0, -100, -50))
@@ -87,6 +95,8 @@ class AVLTreeInsertionTest {
 
         expectedTree.root!!.addRightSon(100, value)
 
+        expectedTree.root?.updateHeight()
+
         // Making tree using existing methods
         for (key in arrayOf(0, 100, 50))
             actualTree[key] = value
@@ -102,6 +112,8 @@ class AVLTreeInsertionTest {
         expectedTree.root!!.addLeftSon(0, value)
 
         expectedTree.root!!.addRightSon(200, value)
+
+        expectedTree.root?.updateHeight()
 
         // Making tree using existing methods
         for (key in arrayOf(0, 100, 200))
@@ -136,7 +148,7 @@ class AVLTreeInsertionTest {
         expectedTree.root!!.right!!.left!!.addRightSon(75, value)
 
         // Making tree using existing methods
-        for (key in arrayOf(0, 100, 200, 150, 50, -25, 75, 62, 56, -25, -75, -50))
+        for (key in arrayOf(0, 100, 200, 50, -25, 75, 62, 56, 25, -75, -50))
             actualTree[key] = value
 
         assertEquals(expectedTree, actualTree)

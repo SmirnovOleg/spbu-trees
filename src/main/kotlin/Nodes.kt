@@ -93,10 +93,14 @@ class AVLNode<K: Comparable<K>, V>(key: K, value: V) :
 
     var height: Int = 1
         private set
-        get() = kotlin.math.max((left?.height ?: 0), (right?.height ?: 0)) + 1
+
     var deltaHeight: Int = 0
         private set
         get() = (left?.height ?: 0) - (right?.height ?: 0)
+
+    internal fun updateHeight() {
+        height = kotlin.math.max((left?.height ?: 0), (right?.height ?: 0)) + 1
+    }
 
     internal fun addLeftSon(key: K, value: V) {
         val newSon = AVLNode(key, value)
@@ -115,10 +119,8 @@ class AVLNode<K: Comparable<K>, V>(key: K, value: V) :
                 && left == other.left
                 && right == other.right
                 && parent?.key == other.parent?.key
-                && parent?.height == other.parent?.height
                 && key == other.key
-                && value == other.value
-                && height == other.height)
+                && value == other.value)
     }
 
     // Using Strategy pattern

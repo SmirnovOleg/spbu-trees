@@ -14,15 +14,12 @@ abstract class Tree<K: Comparable<K>, V, NodeType: Node<K, V, NodeType>> : Itera
         return TreeIterator(this)
     }
 
-    override fun toString(): String {
-        var result: String = "{"
-        this.forEach { result = "$result${it.key}=${it.value}, " }
-        result = if (result.length > 1)
-                    result.substring(0 until (result.length - 2))
-                else
-                    result
-        return "$result}"
-    }
+    val keys: Array<out Any>?
+        get() {
+            val result = arrayListOf<K>()
+            this.forEach { result.add(it.key) }
+            return result.toArray()
+        }
 
 
 

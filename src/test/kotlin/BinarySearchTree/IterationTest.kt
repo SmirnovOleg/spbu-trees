@@ -1,12 +1,10 @@
-import org.junit.Assert.assertEquals
+import org.junit.Assert.assertArrayEquals
 import org.junit.Test
 import java.util.Random
-import java.util.TreeMap
 
 class BinarySearchTreeIterationTest {
 
     private val value = 100
-    private val expectedTree = TreeMap<Int, Int>()
     private val actualTree = BinarySearchTree<Int, Int>()
     private val random = Random()
 
@@ -14,15 +12,10 @@ class BinarySearchTreeIterationTest {
     fun iterateBamboo() {
         val keys = arrayOf(0, 1, 2, 3, 4, 5)
 
-        // Building expected structure of tree
-        for (key in keys)
-            expectedTree[key] = value
-
-        // Making tree using existing methods
         for (key in keys)
             actualTree[key] = value
 
-        assertEquals(expectedTree.toString(), actualTree.toString())
+        assertArrayEquals(keys, actualTree.keys)
     }
 
     @Test
@@ -34,63 +27,46 @@ class BinarySearchTreeIterationTest {
                     1, 3, 5, 7, 9, 11, 13, 15
         )
 
-        // Building expected structure of tree
-        for (key in keys)
-            expectedTree[key] = value
-
-        // Making tree using existing methods
         for (key in keys)
             actualTree[key] = value
 
-        assertEquals(expectedTree.toString(), actualTree.toString())
+        assertArrayEquals(keys.sortedArray(), actualTree.keys)
     }
 
     @Test
     fun iterateBentBamboo() {
         val keys = arrayOf(10, 3, 4, 9, 7, 6, 5)
 
-        // Building expected structure of tree
-        for (key in keys)
-            expectedTree[key] = value
-
-        // Making tree using existing methods
         for (key in keys)
             actualTree[key] = value
 
-        assertEquals(expectedTree.toString(), actualTree.toString())
+        assertArrayEquals(keys.sortedArray(), actualTree.keys)
     }
 
     @Test
     fun iterateEmpty() {
-        assertEquals(expectedTree.toString(), actualTree.toString())
+        val keys = arrayOf<Int>()
+
+        assertArrayEquals(keys, actualTree.keys)
     }
 
     @Test
     fun iterateOnlyRoot() {
-        // Building expected structure of tree
-        expectedTree[0] = value
+        val keys = arrayOf(0)
 
-        // Making tree using existing methods
         actualTree[0] = value
 
-        assertEquals(expectedTree.toString(), actualTree.toString())
+        assertArrayEquals(keys, actualTree.keys)
     }
 
     @Test
     fun iterateRandomStress() {
-        val keys: MutableList<Int> = mutableListOf()
-        for (index in 1..SIZE)
-            keys.add(random.nextInt())
+        val keys = Array(SIZE) { random.nextInt() }
 
-        // Building expected structure of tree
-        for (key in keys)
-            expectedTree[key] = value
-
-        // Making tree using existing methods
         for (key in keys)
             actualTree[key] = value
 
-        assertEquals(expectedTree.toString(), actualTree.toString())
+        assertArrayEquals(keys.sortedArray(), actualTree.keys)
     }
 
 }
