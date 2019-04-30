@@ -146,9 +146,11 @@ class AVLTreeInsertionTest {
         expectedTree.root!!.right!!.left!!.addLeftSon(56, value)
 
         expectedTree.root!!.right!!.left!!.addRightSon(75, value)
+        
+        expectedTree.root!!.right!!.right!!.addLeftSon(150, value)
 
         // Making tree using existing methods
-        for (key in arrayOf(0, 100, 200, 50, -25, 75, 62, 56, 25, -75, -50))
+        for (key in arrayOf(0, 100, 200, 150, 50, 25, 75, 62, 56, -25, -75, -50))
             actualTree[key] = value
 
         assertEquals(expectedTree, actualTree)
